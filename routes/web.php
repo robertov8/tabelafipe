@@ -14,11 +14,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/home', 'HomeController@result')->name('result');
+Route::get('/', 'HomeController@index')->name('home');
+Route::post('/', 'HomeController@result')->name('result');
+Route::get('/history', 'HistoryController@index')->name('history.index');
+Route::post('/history', 'HistoryController@filter')->name('history.filter');
