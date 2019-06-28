@@ -56,7 +56,7 @@
         <div class="card-footer">
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-block">Buscar</button>
+                    <button type="submit" class="btn btn-primary btn-block">Buscar</button>
                 </div>
             </div>
         </div>
