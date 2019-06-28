@@ -11,6 +11,7 @@
                 <th scope="col">Ano</th>
                 <th scope="col">Valor</th>
                 <th scope="col">Consulta</th>
+                <th scope="col">Opções</th>
             </tr>
         </thead>
 
@@ -32,6 +33,11 @@
                     <td>{{ $history->ano_modelo }}</td>
                     <td>{{ $history->valor }}</td>
                     <td>{{ date_format(date_create($history->created_at), "d/m/Y H:i:s") }}</td>
+                    <td>
+                        <a href="{{ route('history.view', $history->id) }}" class="btn btn-primary">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

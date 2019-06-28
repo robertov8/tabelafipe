@@ -4,9 +4,9 @@
     <div class="card-body">
         <h5 class="card-title mb-md-4">
             Saiba mais informações
-                @if($result->TipoVeiculo === 1)
+                @if($result->tipo_veiculo === 1)
                     do <strong>Carro</strong>
-                @elseif ($result->TipoVeiculo === 2)
+                @elseif ($result->tipo_veiculo === 2)
                     da <strong>Moto</strong>
                 @else
                     do <strong>Caminhão</strong>
@@ -25,29 +25,29 @@
                 </h2>
 
                 <h2 class="display-4">
-                    {{ $result->Valor }}
+                    {{ $result->valor }}
                 </h2>
             </div>
 
             <div class="col-md-6">
                 <ul class="list-group list-group-flush text-left text-white ">
                     <li class="list-group-item list-group-item-secondary">
-                        <strong> Modelo: </strong>{{ $result->Modelo }}
+                        <strong> Modelo: </strong>{{ $result->modelo }}
                     </li>
 
                     <li class="list-group-item list-group-item-secondary">
-                        <strong>Marca: </strong>{{ $result->Marca }}
+                        <strong>Marca: </strong>{{ $result->marca }}
                     </li>
                     <li class="list-group-item list-group-item-secondary">
-                        <strong> Ano: </strong>{{ $result->AnoModelo }}
+                        <strong> Ano: </strong>{{ $result->ano_modelo }}
                     </li>
                     <li class="list-group-item list-group-item-secondary">
                         <strong>Sigla / Combustivel: </strong>
-                        {{ $result->SiglaCombustivel }} / {{ $result->Combustivel }}
+                        {{ $result->sigla_combustivel }} / {{ $result->combustivel }}
                     </li>
                     <li class="list-group-item list-group-item-secondary">
                         <strong>Código de Referencia: </strong>
-                        {{ $result->CodigoFipe }}
+                        {{ $result->codigo_fipe }}
                     </li>
                 </ul>
             </div>
@@ -55,6 +55,6 @@
     </div>
 
     <div class="card-footer text-white">
-        <small class="text-muted">Atualizando em: {{ $result->MesReferencia }}</small>
+        <small class="text-muted">Atualizando em: {{ $result->mes_referencia }}</small>
     </div>
 </div>

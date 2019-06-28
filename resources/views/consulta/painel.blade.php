@@ -1,5 +1,5 @@
 <div class="card text-center">
-    <form action="{{ route('result') }}" method="POST">
+    <form action="{{ route('store') }}" method="POST">
         @csrf
 
         <div class="card-header">Consultando a tabela de preços</div>
@@ -12,8 +12,8 @@
                     <div class="form-row">
                         <div class="col-12 col-md-3">
                             <div class="form-group">
-                                <label for="veiculo">Veiculo</label>
-                                <select name="veiculo" id="veiculo" class="form-control" onchange="onChangeMarca(this.value)" required>
+                                <label for="tipo_veiculo">Veiculo</label>
+                                <select name="tipo_veiculo" id="tipo_veiculo" class="form-control" onchange="onChangeMarca(this.value)" required>
                                     <option value="">Selecione um veiculo</option>
                                     <option value="carros">Carros</option>
                                     <option value="motos">Motos</option>
@@ -42,8 +42,8 @@
 
                         <div class="col-12 col-md-2">
                             <div class="form-group">
-                                <label for="ano">Ano</label>
-                                <select name="ano" id="ano" class="form-control" required disabled>
+                                <label for="ano_modelo">Ano</label>
+                                <select name="ano_modelo" id="ano_modelo" class="form-control" required disabled>
                                     <option value="">Selecione o ano</option>
                                 </select>
                             </div>
@@ -65,10 +65,10 @@
 
 @section('scripts')
     <script>
-        let veiculo;
+        let tipo_veiculo;
         let marca;
         let modelo;
-        let ano;
+        let ano_modelo;
 
         function initSelect(id) {
             const select = document.getElementById(id);
@@ -88,15 +88,15 @@
 
         // Iniciando as buscas
         function onChangeMarca(value) {
-            veiculo = document.getElementById('veiculo');
-            veiculo.value = value;
+            tipo_veiculo = document.getElementById('tipo_veiculo');
+            tipo_veiculo.value = value;
 
             marca = initSelect('marca');
             modelo = initSelect('modelo');
-            ano = initSelect('ano');
+            ano_modelo = initSelect('ano_modelo');
 
             // No caso de nenhum veiculo selecionado
-            if (veiculo.value === '')
+            if (tipo_veiculo.value === '')
                 return;
 
             fetch(`https://parallelum.com.br/fipe/api/v1/${value}/marcas`)
@@ -111,7 +111,7 @@
         }
 
         function onChangeModelo(value) {
-            fetch(`https://parallelum.com.br/fipe/api/v1/${veiculo.value}/marcas/${value}/modelos`)
+            fetch(`https://parallelum.com.br/fipe/api/v1/${tipo_veiculo.value}/marcas/${value}/modelos`)
                 .then(function (response) {
                     response.json().then(function (result) {
                         result.modelos.forEach(function (it) {
@@ -123,12 +123,12 @@
         }
 
         function onChangeAno(value) {
-            fetch(`https://parallelum.com.br/fipe/api/v1/${veiculo.value}/marcas/${marca.value}/modelos/${modelo.value}/anos`)
+            fetch(`https://parallelum.com.br/fipe/api/v1/${tipo_veiculo.value}/marcas/${marca.value}/modelos/${modelo.value}/anos`)
                 .then(function (response) {
                     response.json().then(function (result) {
                         result.forEach(function (it) {
-                            ano.add(createOption(it['codigo'], it['nome']));
-                            ano.disabled = false;
+                            ano_modelo.add(createOption(it['codigo'], it['nome']));
+                            ano_modelo.disabled = false;
                         });
                     });
                 });

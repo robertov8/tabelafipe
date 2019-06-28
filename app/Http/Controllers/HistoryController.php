@@ -24,7 +24,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $histories = auth()->user()->histories()->paginate(10);
+        $histories = auth()->user()->histories()->orderBy('created_at', 'DESC')->paginate(10);
         return view('history.index', compact('histories'));
     }
 
