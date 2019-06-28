@@ -1,6 +1,6 @@
 <div class="table-responsive">
     <table class="table table-striped">
-        <caption>Lista de consultas realizadas / Total: {{ $histories->total() }} {{ debug($histories) }}</caption>
+        <caption>Lista de consultas realizadas / Total: {{ $histories->total() }}</caption>
 
         <thead>
             <tr>
