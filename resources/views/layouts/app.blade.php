@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -50,7 +51,11 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a href="{{ route('history.index') }}" class="nav-link active">Histórico</a>
+                                <a href="{{ route('home') }}" class="nav-link {{ route('home') == url()->current() ? 'active' : '' }}">Consulta</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('history.index') }}" class="nav-link {{ route('history.index') == url()->current() ? 'active' : '' }}">Histórico</a>
                             </li>
 
                             <li class="nav-item dropdown">
