@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\History;
+use App\User;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -22,36 +23,15 @@ class HistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $histories = auth()->user()->histories()->orderBy('created_at', 'DESC')->paginate(10);
+        if (!empty($request->filter))
+            $query = auth()->user()->filter($request->filter);
+        else
+            $query = auth()->user()->histories();
+
+        $histories = $query->paginate(10);
+
         return view('history.index', compact('histories'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function filter(Request $request)
-    {
-        $attributes = $request->validate(['filter' => 'required|min:3']);
-
-        $likeAttributes = "%${attributes['filter']}%";
-
-        $filterHistories = auth()->user()
-            ->histories()
-            ->Where('valor', 'like', $likeAttributes)
-            ->orWhere('marca', 'like', $likeAttributes)
-            ->orWhere('modelo', 'like', $likeAttributes)
-            ->orWhere('ano_modelo', 'like', $likeAttributes)
-            ->orWhere('combustivel', 'like', $likeAttributes)
-            ->orWhere('codigo_fipe', 'like', $likeAttributes)
-            ->orWhere('mes_referencia', 'like', $likeAttributes)
-            ->orWhere('tipo_veiculo', 'like', $likeAttributes)
-            ->paginate(10);
-
-        return view('history.index', ['histories' => $filterHistories]);
     }
 }
