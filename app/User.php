@@ -38,8 +38,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function histories()
+    public function histories(string $filter = '')
     {
-        return $this->hasOne(History::class);
+        return $this
+            ->hasMany(History::class)
+            ->orderBy('created_at', 'DESC');
+    }
+
+    public function filter(string $filter = '')
+    {
+        if (empty($filter))
+            return $this->histories();
+
+        $filter = "%$filter%";
+
+        return $this->histories()
+            ->Where('valor', 'like', $filter)
+            ->orWhere('marca', 'like', $filter)
+            ->orWhere('modelo', 'like', $filter)
+            ->orWhere('ano_modelo', 'like', $filter)
+            ->orWhere('combustivel', 'like', $filter)
+            ->orWhere('codigo_fipe', 'like', $filter)
+            ->orWhere('mes_referencia', 'like', $filter)
+            ->orWhere('tipo_veiculo', 'like', $filter);
     }
 }

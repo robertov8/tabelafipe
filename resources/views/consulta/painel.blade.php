@@ -101,12 +101,19 @@
 
             fetch(`https://parallelum.com.br/fipe/api/v1/${value}/marcas`)
                 .then(function (response) {
-                    response.json().then(function (result) {
-                        result.forEach(function (it) {
-                            marca.add(createOption(it['codigo'], it['nome']));
-                            marca.disabled = false;
+                    if (response.status === 200) {
+                        response.json().then(function (result) {
+                            result.forEach(function (it) {
+                                marca.add(createOption(it['codigo'], it['nome']));
+                                marca.disabled = false;
+                            });
                         });
-                    });
+                    } else {
+                        alert('Error ao consultar a API, tente novamente mais tarde!');
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
                 });
         }
 
